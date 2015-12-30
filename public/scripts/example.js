@@ -10,6 +10,33 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+"use strict";
+
+/*
+window.mtgjsoncallback = function(data, name) {
+    console.log(name);
+    console.log(data["AWOL"]);
+}
+*/
+
+$(document).ready(function() {
+    $.ajax({
+        type: 'GET',
+        url: "http://mtgjson.com/json/AllCards.jsonp",
+        async: false,
+        jsonpCallback: 'mtgjsoncallback',
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(cards) {
+            console.log(cards["Lightning Bolt"]);
+        },
+        error: function(e) {
+            console.log(e.message);
+        }
+    });
+});
+
+/*
 var Comment = React.createClass({
   rawMarkup: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -144,3 +171,4 @@ ReactDOM.render(
   <CommentBox url="/api/comments" pollInterval={2000} />,
   document.getElementById('content')
 );
+*/
