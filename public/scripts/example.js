@@ -19,23 +19,69 @@ window.mtgjsoncallback = function(data, name) {
 }
 */
 
-$(document).ready(function() {
-    $.ajax({
-        type: 'GET',
-        url: "http://mtgjson.com/json/AllCards.jsonp",
-        async: false,
-        jsonpCallback: 'mtgjsoncallback',
-        contentType: "application/json",
-        dataType: 'jsonp',
-        success: function(cards) {
-            console.log(cards["Lightning Bolt"]);
-        },
-        error: function(e) {
-            console.log(e.message);
-        }
-    });
+
+var CardDetails = React.createClass({
+    render: function() {
+        return (
+            <div className="cardDetails">
+                <h2>Card Details</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>{this.props.card.name}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
 });
 
+var CardBox = React.createClass({
+    loadCardsFromServer: function() {
+        $.ajax({
+            type: 'GET',
+            url: this.props.url,
+            async: false,
+            jsonpCallback: 'mtgjsoncallback',
+            contentType: "application/json",
+            dataType: 'jsonp',
+            success: function(cards) {
+                console.log(cards[this.props.cardName]);
+                this.setState({cards: cards});
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(status, err.toString());
+            }.bind(this)
+        });
+    },
+
+    getInitialState: function() {
+        return {cards: {name: "Null Card"}}
+    },
+
+    componentDidMount: function() {
+        this.loadCardsFromServer();
+        // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    },
+
+    // <CardDetails card={this.state.cards[this.props.cardName]} />
+    render: function() {
+        var card = this.state.cards[this.props.cardName] || {name: "Null Card"};
+        return (
+            <div className="cardBox">
+                <h1>Cards</h1>
+                <CardDetails card={card} />
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(
+  <CardBox url="http://mtgjson.com/json/AllCards.jsonp" cardName="Lightning Bolt" />,
+  document.getElementById('content')
+);
 /*
 var Comment = React.createClass({
   rawMarkup: function() {
