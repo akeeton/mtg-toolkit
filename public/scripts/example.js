@@ -178,7 +178,7 @@ var CardBox = React.createClass({
     },
 
     getInitialState: function() {
-        return {cards: {name: "Null Card"}}
+        return {cards: null}
     },
 
     componentDidMount: function() {
@@ -188,13 +188,18 @@ var CardBox = React.createClass({
 
     // <CardDetails card={this.state.cards[this.props.cardName]} />
     render: function() {
-        var card = this.state.cards[this.props.cardName] || {name: "Null Card"};
-        return (
-            <div className="cardBox">
-                <h1>Cards</h1>
-                <CardDetails card={card} />
-            </div>
-        );
+        if (this.state.cards && this.state.cards[this.props.cardName]) {
+            return (
+                <div className="cardBox">
+                    <h1>Card Box</h1>
+                    <CardDetails card={this.state.cards[this.props.cardName]} />
+                </div>
+            );
+        } else {
+            return (
+                <div className="cardBox" />
+            );
+        }
     }
 });
 
