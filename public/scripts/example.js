@@ -28,8 +28,128 @@ var CardDetails = React.createClass({
                 <table>
                     <tbody>
                         <tr>
+                            <td>ID</td>
+                            <td>{this.props.card.id}</td>
+                        </tr>
+                        <tr>
+                            <td>Layout</td>
+                            <td>{this.props.card.layout}</td>
+                        </tr>
+                        <tr>
                             <td>Name</td>
                             <td>{this.props.card.name}</td>
+                        </tr>
+                        <tr>
+                            <td>Names</td>
+                            <td>{this.props.card.names}</td>
+                        </tr>
+                        <tr>
+                            <td>Mana cost</td>
+                            <td>{this.props.card.manaCost}</td>
+                        </tr>
+                        <tr>
+                            <td>Converted mana cost</td>
+                            <td>{this.props.card.cmc}</td>
+                        </tr>
+                        <tr>
+                            <td>Colors</td>
+                            <td>{this.props.card.colors}</td>
+                        </tr>
+                        <tr>
+                            <td>Color identity</td>
+                            <td>{this.props.card.colorIdentity}</td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>{this.props.card.type}</td>
+                        </tr>
+                        <tr>
+                            <td>Supertypes</td>
+                            <td>{this.props.card.supertypes}</td>
+                        </tr>
+                        <tr>
+                            <td>Types</td>
+                            <td>{this.props.card.types}</td>
+                        </tr>
+                        <tr>
+                            <td>Subtypes</td>
+                            <td>{this.props.card.subtypes}</td>
+                        </tr>
+                        <tr>
+                            <td>Rarity</td>
+                            <td>{this.props.card.rarity}</td>
+                        </tr>
+                        <tr>
+                            <td>Text</td>
+                            <td>{this.props.card.text}</td>
+                        </tr>
+                        <tr>
+                            <td>Flavor</td>
+                            <td>{this.props.card.flavor}</td>
+                        </tr>
+                        <tr>
+                            <td>Artist</td>
+                            <td>{this.props.card.artist}</td>
+                        </tr>
+                        <tr>
+                            <td>Number</td>
+                            <td>{this.props.card.number}</td>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td>{this.props.card.power}</td>
+                        </tr>
+                        <tr>
+                            <td>Toughness</td>
+                            <td>{this.props.card.toughness}</td>
+                        </tr>
+                        <tr>
+                            <td>Loyalty</td>
+                            <td>{this.props.card.loyalty}</td>
+                        </tr>
+                        <tr>
+                            <td>Multiverse ID</td>
+                            <td>{this.props.card.multiverseid}</td>
+                        </tr>
+                        <tr>
+                            <td>Variations</td>
+                            <td>{this.props.card.variations}</td>
+                        </tr>
+                        <tr>
+                            <td>Image name</td>
+                            <td>{this.props.card.imageName}</td>
+                        </tr>
+                        <tr>
+                            <td>Watermark</td>
+                            <td>{this.props.card.watermark}</td>
+                        </tr>
+                        <tr>
+                            <td>Border</td>
+                            <td>{this.props.card.border}</td>
+                        </tr>
+                        <tr>
+                            <td>Timeshifted</td>
+                            <td>{this.props.card.timeshifted}</td>
+                        </tr>
+                        <tr>
+                            <td>Hand modifier (Vanguard)</td>
+                            <td>{this.props.card.hand}</td>
+                        </tr>
+                        <tr>
+                            <td>Life modifier (Vanguard)</td>
+                            <td>{this.props.card.life}</td>
+                        </tr>
+                        <tr>
+                            <td>On the Reserved List</td>
+                            <td>{this.props.card.reserved}</td>
+                        </tr>
+                        <tr>
+                            <td>Promo card release date</td>
+                            <td>{this.props.card.releaseDate}</td>
+                        </tr>
+                        <tr>
+                            <td>Released in a core box set</td>
+                            <td>{this.props.card.starter}</td>
                         </tr>
                     </tbody>
                 </table>
