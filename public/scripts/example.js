@@ -19,7 +19,6 @@ window.mtgjsoncallback = function(data, name) {
 }
 */
 
-
 var CardDetails = React.createClass({
     render: function() {
         return (
@@ -158,7 +157,56 @@ var CardDetails = React.createClass({
     }
 });
 
-var CardBox = React.createClass({
+var CardListEntry = React.createClass({
+    render: function() {
+        return (
+            <div className="cardListEntry">
+                <div className="cardListEntryName">
+                    {this.props.card.name}
+                </div>
+                <div className="cardListEntryManaCost">
+                    {this.props.card.manaCost}
+                </div>
+            </div>
+        );
+    }
+});
+
+var CardList = React.createClass({
+    render: function() {
+        /*
+        var cardsAsArray = $.map(this.props.cards, function(card, name) {
+            return card;
+        });
+        */
+        /*
+        $.each(this.props.cards, function(name, card) {
+            cardsAsArray.push(card);
+        });
+        */
+
+       /*
+        var cardListEntryNodes = cardsAsArray.map(function(card) {
+            return (
+                <CardListEntry card={card} key={card.id} />
+            );
+        });
+        */
+        var cardListEntryNodes = $.map(this.props.cards, function(card, name) {
+            return (
+                <CardListEntry card={card} key={name} />
+            );
+        });
+
+        return (
+            <div className="cardList">
+                {cardListEntryNodes}
+            </div>
+        );
+    }
+});
+
+var CardListBox = React.createClass({
     loadCardsFromServer: function() {
         $.ajax({
             type: 'GET',
@@ -168,7 +216,6 @@ var CardBox = React.createClass({
             contentType: "application/json",
             dataType: 'jsonp',
             success: function(cards) {
-                console.log(cards[this.props.cardName]);
                 this.setState({cards: cards});
             }.bind(this),
             error: function(xhr, status, err) {
@@ -186,25 +233,24 @@ var CardBox = React.createClass({
         // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
 
-    // <CardDetails card={this.state.cards[this.props.cardName]} />
     render: function() {
-        if (this.state.cards && this.state.cards[this.props.cardName]) {
+        if (this.state.cards) {
             return (
-                <div className="cardBox">
-                    <h1>Card Box</h1>
-                    <CardDetails card={this.state.cards[this.props.cardName]} />
+                <div className="cardListBox">
+                    <h1>Card List Box</h1>
+                    <CardList cards={this.state.cards} />
                 </div>
             );
         } else {
             return (
-                <div className="cardBox" />
+                <div className="cardListBox" />
             );
         }
     }
 });
 
 ReactDOM.render(
-  <CardBox url="http://mtgjson.com/json/AllCards.jsonp" cardName="Lightning Bolt" />,
+  <CardListBox url="http://mtgjson.com/json/AllCards.jsonp" />,
   document.getElementById('content')
 );
 /*
