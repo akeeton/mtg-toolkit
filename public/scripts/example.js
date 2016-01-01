@@ -236,7 +236,13 @@ var CardListBox = React.createClass({
             return (
                 <div className="cardListBox">
                     <h1>Card List Box</h1>
-                    <CardList cards={this.state.cards} />
+                    <div className="cardListBoxCardBox col-md-8">
+                        <h2>Card List</h2>
+                        <CardList cards={this.state.cards} />
+                    </div>
+                    <div className="cardListBoxCardDetails col-md-4">
+                        <h2>Card Details</h2>
+                    </div>
                 </div>
             );
         } else {
