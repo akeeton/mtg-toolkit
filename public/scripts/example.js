@@ -160,14 +160,10 @@ var CardDetails = React.createClass({
 var CardListEntry = React.createClass({
     render: function() {
         return (
-            <div className="cardListEntry">
-                <div className="cardListEntryName">
-                    {this.props.card.name}
-                </div>
-                <div className="cardListEntryManaCost">
-                    {this.props.card.manaCost}
-                </div>
-            </div>
+            <tr>
+                <td>{this.props.card.name}</td>
+                <td>{this.props.card.manaCost}</td>
+            </tr>
         );
     }
 });
@@ -199,9 +195,11 @@ var CardList = React.createClass({
         });
 
         return (
-            <div className="cardList">
-                {cardListEntryNodes}
-            </div>
+            <table className="cardList">
+                <tbody>
+                    {cardListEntryNodes}
+                </tbody>
+            </table>
         );
     }
 });
