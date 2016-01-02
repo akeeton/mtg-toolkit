@@ -23,7 +23,6 @@ var CardDetails = React.createClass({
     render: function() {
         return (
             <div className="cardDetails">
-                <h2>Card Details</h2>
                 <table>
                     <tbody>
                         <tr>
@@ -158,9 +157,13 @@ var CardDetails = React.createClass({
 });
 
 var CardListEntry = React.createClass({
+    handleMouseOver: function() {
+        this.props.onMouseOver(this.props.card);
+    },
+
     render: function() {
         return (
-            <tr>
+            <tr onMouseOver={this.handleMouseOver}>
                 <td>{this.props.card.name}</td>
                 <td>{this.props.card.manaCost}</td>
             </tr>
@@ -170,29 +173,15 @@ var CardListEntry = React.createClass({
 
 var CardList = React.createClass({
     render: function() {
-        /*
-        var cardsAsArray = $.map(this.props.cards, function(card, name) {
-            return card;
-        });
-        */
-        /*
-        $.each(this.props.cards, function(name, card) {
-            cardsAsArray.push(card);
-        });
-        */
-
-       /*
-        var cardListEntryNodes = cardsAsArray.map(function(card) {
-            return (
-                <CardListEntry card={card} key={card.id} />
-            );
-        });
-        */
         var cardListEntryNodes = $.map(this.props.cards, function(card, name) {
             return (
-                <CardListEntry card={card} key={name} />
+                <CardListEntry
+                    onMouseOver={this.props.onMouseOver}
+                    card={card}
+                    key={name}
+                />
             );
-        });
+        }.bind(this));
 
         return (
             <table className="cardList">
@@ -223,7 +212,7 @@ var CardListBox = React.createClass({
     },
 
     getInitialState: function() {
-        return {cards: null}
+        return {cards: null, hoveredCard: null}
     },
 
     componentDidMount: function() {
@@ -231,17 +220,31 @@ var CardListBox = React.createClass({
         // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
 
+    handleCardMouseOver: function(card) {
+        this.setState({hoveredCard: card});
+    },
+
     render: function() {
+
+        var cardDetailsNode =
+              this.state.hoveredCard
+            ? <CardDetails card={this.state.hoveredCard} />
+            : null;
+
         if (this.state.cards) {
             return (
                 <div className="cardListBox">
                     <h1>Card List Box</h1>
                     <div className="cardListBoxCardBox col-md-8">
                         <h2>Card List</h2>
-                        <CardList cards={this.state.cards} />
+                        <CardList
+                            cards={this.state.cards}
+                            onMouseOver={this.handleCardMouseOver}
+                        />
                     </div>
                     <div className="cardListBoxCardDetails col-md-4">
                         <h2>Card Details</h2>
+                        {cardDetailsNode}
                     </div>
                 </div>
             );
